@@ -12,14 +12,13 @@
   "message_cleanup_delay_success": 5000,
   "message_cleanup_delay_error": 30000,
   "features": {
-    "ex_gym_channel": true,
+    "ex_gym_channel": false,
     "notifications": true,
     "roles": true
   },
   "channels": {
-    "bot_lab": "new-castle",
-    "mod_bot_lab": "bots",
-    "ex_gym_raids": "new-castle"
+    "bot_lab": "bot-commands",
+    "mod_bot_lab": "bots"
   },
   "help_groups": [
   ]
