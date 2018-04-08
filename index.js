@@ -13,6 +13,7 @@ require('loglevel-prefix-persist/server')(process.env.NODE_ENV, log, {
 log.setLevel('debug');
 
 const private_settings = require('./data/private-settings'),
+    Express = require('express'),
     Commando = require('discord.js-commando'),
     Discord = require('discord.js'),
     Client = new Commando.Client({
@@ -206,13 +207,9 @@ NotifyClient.on('rateLimit', event =>
 
 NotifyClient.login(private_settings.discord_notify_token);
 
-var express = require('express');
-var app = express();
+Express.set('port', (process.env.PORT || 5000));
 
-app.set('port', (process.env.PORT || 5000));
-
-//For avoidong Heroku $PORT error
-app.get('/', function(request, response) {
+Express.get('/', function(request, response) {
     var result = 'App is running'
     response.send(result);
 }).listen(app.get('port'), function() {
