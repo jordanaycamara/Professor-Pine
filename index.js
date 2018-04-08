@@ -13,7 +13,7 @@ require('loglevel-prefix-persist/server')(process.env.NODE_ENV, log, {
 log.setLevel('debug');
 
 const private_settings = require('./data/private-settings'),
-    Express = require('express'),
+    Express = require('express')(),
     Commando = require('discord.js-commando'),
     Discord = require('discord.js'),
     Client = new Commando.Client({
