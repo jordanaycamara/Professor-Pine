@@ -8,9 +8,9 @@
     "github_password": "Tiff52811",
     "google_api_key": "",
     "db": {
-        "host": "us-cdbr-iron-east-05.cleardb.net/heroku_2799e9c84c66838",
+        "host": "us-cdbr-iron-east-05.cleardb.net",
         "user": "b1f6fc9acf965d",
         "password": "ebc54f2c",
-        "schema": "pine"
+        "schema": "heroku_2799e9c84c66838"
     }
 }
