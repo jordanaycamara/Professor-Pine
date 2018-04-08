@@ -17,16 +17,10 @@
     "roles": true
   },
   "channels": {
-    "bot_lab": "the-bot-lab",
-    "mod_bot_lab": "mod-bot-only",
-    "unown": "unown-sightings",
-    "ex_gym_raids": "potential-ex-gym-raids"
+    "bot_lab": "new-castle",
+    "mod_bot_lab": "bots",
+    "ex_gym_raids": "new-castle"
   },
   "help_groups": [
-    "basic-raid",
-    "raid-crud",
-    "roles",
-    "notifications",
-    "util"
   ]
 }
