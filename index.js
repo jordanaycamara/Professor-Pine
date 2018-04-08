@@ -212,6 +212,6 @@ Express.set('port', (process.env.PORT || 5000));
 Express.get('/', function(request, response) {
     var result = 'App is running'
     response.send(result);
-}).listen(app.get('port'), function() {
+}).listen(Express.get('port'), function() {
     console.log('App is running, server is listening on port ', app.get('port'));
 });
