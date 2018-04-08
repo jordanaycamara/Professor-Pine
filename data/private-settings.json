@@ -1,0 +1,16 @@
+{
+    "discord_bot_token": "NDMyMjIxMTk5MDc0ODUyODY4.Darvjw.zakdcogS83In56Meapm1tVzcvfc",
+    "discord_notify_token": "NDMyMjIxMTk5MDc0ODUyODY4.Darvjw.zakdcogS83In56Meapm1tVzcvfc",
+    "owner": "210735297959428096",
+    "pokemon_url_base": "https://rankedboost.com/wp-content/plugins/ice/pokemon-go/",
+    "github_repo": "https://github.com/jordanaycamara/Professor-Pine.git",
+    "github_user": "jordanaycamara",
+    "github_password": "Tiff52811",
+    "google_api_key": "",
+    "db": {
+        "host": "us-cdbr-iron-east-05.cleardb.net/heroku_2799e9c84c66838",
+        "user": "b1f6fc9acf965d",
+        "password": "ebc54f2c",
+        "schema": "pine"
+    }
+}
