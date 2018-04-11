@@ -29,8 +29,6 @@
   {
     "name": "bulbasaur",
     "number": 1,
-    "cp": 3757,
-    "tier": 1,
     "type": [
       "grass",
       "poison"
@@ -59,8 +57,6 @@
   {
     "name": "charmander",
     "number": 4,
-    "cp": 3380,
-    "tier": 1,
     "type": [
       "fire"
     ]
@@ -87,8 +83,6 @@
   {
     "name": "squirtle",
     "number": 7,
-    "cp": 3125,
-    "tier": 1,
     "type": [
       "water"
     ]
@@ -418,8 +412,6 @@
   {
     "name": "venomoth",
     "number": 49,
-    "cp": 10572,
-    "tier": 2,
     "type": [
       "bug",
       "poison"
@@ -790,8 +782,6 @@
   {
     "name": "onix",
     "number": 95,
-    "cp": 9534,
-    "tier": 3,
     "type": [
       "rock",
       "ground"
@@ -890,8 +880,6 @@
   {
     "name": "lickitung",
     "number": 108,
-    "cp": 6433,
-    "tier": 2,
     "type": [
       "normal"
     ]
@@ -1167,8 +1155,6 @@
   {
     "name": "kabutops",
     "number": 141,
-    "cp": 19004,
-    "tier": 3,
     "type": [
       "rock",
       "water"
