@@ -4,8 +4,7 @@ const log = require('loglevel').getLogger('LabelGroupCommand'),
 	Commando = require('discord.js-commando'),
 	{CommandGroup} = require('../../app/constants'),
 	Helper = require('../../app/helper'),
-	Raid = require('../../app/raid'),
-	settings = require('../../data/settings');
+	Raid = require('../../app/raid');
 
 class LabelGroupCommand extends Commando.Command {
 	constructor(client) {
@@ -43,7 +42,7 @@ class LabelGroupCommand extends Commando.Command {
 			info = Raid.setGroupLabel(message.channel.id, message.member.id, label);
 
 		if (!info.error) {
-			message.react(Helper.getEmoji(settings.emoji.thumbs_up) || '👍')
+			message.react(Helper.getEmoji('snorlaxthumbsup') || '👍')
 				.catch(err => log.error(err));
 
 			Raid.refreshStatusMessages(info.raid);

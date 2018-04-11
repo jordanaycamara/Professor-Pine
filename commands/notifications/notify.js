@@ -4,8 +4,7 @@ const log = require('loglevel').getLogger('NotifyCommand'),
 	Commando = require('discord.js-commando'),
 	{CommandGroup} = require('../../app/constants'),
 	Helper = require('../../app/helper'),
-	Notify = require('../../app/notify'),
-	settings = require('../../data/settings');
+	Notify = require('../../app/notify');
 
 class NotifyCommand extends Commando.Command {
 	constructor(client) {
@@ -40,7 +39,7 @@ class NotifyCommand extends Commando.Command {
 		const pokemon = args['pokemon'];
 
 		Notify.assignPokemonNotification(message.member, pokemon)
-			.then(result => message.react(Helper.getEmoji(settings.emoji.thumbs_up) || '👍'))
+			.then(result => message.react(Helper.getEmoji('snorlaxthumbsup') || '👍'))
 			.catch(err => log.error(err));
 	}
 }

@@ -5,8 +5,7 @@ const log = require('loglevel').getLogger('StartTimeCommand'),
 	{CommandGroup, RaidStatus, TimeParameter} = require('../../app/constants'),
 	Helper = require('../../app/helper'),
 	moment = require('moment'),
-	Raid = require('../../app/raid'),
-	settings = require('../../data/settings');
+	Raid = require('../../app/raid');
 
 class StartTimeCommand extends Commando.Command {
 	constructor(client) {
@@ -49,7 +48,7 @@ class StartTimeCommand extends Commando.Command {
 			return;
 		}
 
-		message.react(Helper.getEmoji(settings.emoji.thumbs_up) || '👍')
+		message.react(Helper.getEmoji('snorlaxthumbsup') || '👍')
 			.catch(err => log.error(err));
 
 		const group_id = info.raid.attendees[message.member.id].group,

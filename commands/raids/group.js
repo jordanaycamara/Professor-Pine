@@ -5,7 +5,6 @@ const log = require('loglevel').getLogger('GroupCommand'),
 	{CommandGroup} = require('../../app/constants'),
 	Helper = require('../../app/helper'),
 	Raid = require('../../app/raid'),
-	settings = require('../../data/settings'),
 	Utility = require('../../app/utility');
 
 class GroupCommand extends Commando.Command {
@@ -81,7 +80,7 @@ class GroupCommand extends Commando.Command {
 						info = Raid.setMemberGroup(message.channel.id, message.member.id, group_id);
 
 					if (!info.error) {
-						message.react(Helper.getEmoji(settings.emoji.thumbs_up) || '👍')
+						message.react(Helper.getEmoji('snorlaxthumbsup') || '👍')
 							.catch(err => log.error(err));
 
 						Raid.refreshStatusMessages(info.raid);

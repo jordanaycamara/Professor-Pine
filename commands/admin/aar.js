@@ -4,8 +4,7 @@ const log = require('loglevel').getLogger('AarCommand'),
 	Commando = require('discord.js-commando'),
 	{CommandGroup} = require('../../app/constants'),
 	Helper = require('../../app/helper'),
-	Role = require('../../app/role'),
-	settings = require('../../data/settings');
+	Role = require('../../app/role');
 
 class AarCommand extends Commando.Command {
 	constructor(client) {
@@ -30,7 +29,7 @@ class AarCommand extends Commando.Command {
 
 	async run(message, args) {
 		Role.setAutoAssignRole(message.guild, args)
-			.then(() => message.react(Helper.getEmoji(settings.emoji.thumbs_up) || '👍'))
+			.then(() => message.react(Helper.getEmoji('snorlaxthumbsup') || '👍'))
 			.catch(err => {
 				if (err && err.error) {
 					message.reply(err.error)

@@ -7,8 +7,7 @@ const log = require('loglevel').getLogger('SubmitRequestCommand'),
 	Helper = require('../../app/helper'),
 	https = require('https'),
 	private_settings = require('../../data/private-settings'),
-	Raid = require('../../app/raid'),
-	settings = require('../../data/settings');
+	Raid = require('../../app/raid');
 
 class SubmitRequestCommand extends Commando.Command {
 	constructor(client) {
@@ -76,7 +75,7 @@ class SubmitRequestCommand extends Commando.Command {
 					.on('data', chunk => log.debug('Response: ' + chunk))
 					.on('error', err => log.error(err))
 					.on('end', () => {
-						message.react(Helper.getEmoji(settings.emoji.thumbs_up) || '👍')
+						message.react(Helper.getEmoji('snorlaxthumbsup') || '👍')
 							.catch(err => log.error(err));
 					});
 			});

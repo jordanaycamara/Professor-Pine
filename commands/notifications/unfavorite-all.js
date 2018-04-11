@@ -4,8 +4,7 @@ const log = require('loglevel').getLogger('UnfavoriteAllCommand'),
 	Commando = require('discord.js-commando'),
 	{CommandGroup} = require('../../app/constants'),
 	Helper = require('../../app/helper'),
-	Notify = require('../../app/notify'),
-	settings = require('../../data/settings');
+	Notify = require('../../app/notify');
 
 class UnfavoriteAllCommand extends Commando.Command {
 	constructor(client) {
@@ -30,7 +29,7 @@ class UnfavoriteAllCommand extends Commando.Command {
 
 	async run(message, args) {
 		Notify.removeAllGymNotifications(message.member)
-			.then(result => message.react(Helper.getEmoji(settings.emoji.thumbs_up) || '👍'))
+			.then(result => message.react(Helper.getEmoji('snorlaxthumbsup') || '👍'))
 			.catch(err => log.error(err));
 	}
 }

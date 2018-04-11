@@ -8,7 +8,6 @@ const log = require('loglevel').getLogger('FavoriteCommand'),
 	Helper = require('../../app/helper'),
 	Notify = require('../../app/notify'),
 	Raid = require('../../app/raid'),
-	settings = require('../../data/settings'),
 	Utility = require('../../app/utility');
 
 class FavoriteCommand extends Commando.Command {
@@ -115,7 +114,7 @@ class FavoriteCommand extends Commando.Command {
 					Notify.assignGymNotification(message.member, gym_id)
 						.then(result => {
 							if (message.channel.messages.has(message.id)) {
-								message.react(Helper.getEmoji(settings.emoji.thumbs_up) || '👍');
+								message.react(Helper.getEmoji('snorlaxthumbsup') || '👍');
 							}
 						})
 						.catch(err => log.error(err));

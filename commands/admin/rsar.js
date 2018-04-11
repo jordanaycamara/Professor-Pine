@@ -4,8 +4,7 @@ const log = require('loglevel').getLogger('RsarCommand'),
 	Commando = require('discord.js-commando'),
 	{CommandGroup} = require('../../app/constants'),
 	Helper = require('../../app/helper'),
-	Role = require('../../app/role'),
-	settings = require('../../data/settings');
+	Role = require('../../app/role');
 
 class RsarCommand extends Commando.Command {
 	constructor(client) {
@@ -32,7 +31,7 @@ class RsarCommand extends Commando.Command {
 		args = args.split(/,\s?/g);
 
 		Role.removeOldRoles(message.guild, args)
-			.then(() => message.react(Helper.getEmoji(settings.emoji.thumbs_up) || '👍'))
+			.then(() => message.react(Helper.getEmoji('snorlaxthumbsup') || '👍'))
 			.catch(err => {
 				if (err && err.error) {
 					message.reply(err.error)
