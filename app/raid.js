@@ -891,17 +891,22 @@ class Raid {
         return message;
     }
 
-    async getFormattedMessage(raid) {
-        const pokemon = !!raid.pokemon.name ?
-            raid.pokemon.name.charAt(0).toUpperCase() + raid.pokemon.name.slice(1) :
-            '????',
-            pokemon_url = !!raid.pokemon.name ?
-            `${private_settings.pokemon_url_base}${pokemon}-Pokemon-Go.png` :
-            '',
+	async getFormattedMessage(raid) {
+		const pokemon = !!raid.pokemon.name ?
+			raid.pokemon.name.charAt(0).toUpperCase() + raid.pokemon.name.slice(1) :
+			'????',
+			pokemon_url = !!raid.pokemon.name ?
+				`${private_settings.pokemon_url_base}${pokemon}-Pokemon-Go.png` :
+				'',
+			pokemon_cp_string = raid.pokemon.boss_cp > 0 ?
+				` (${raid.pokemon.boss_cp} CP)\n\n` +
+				`Normal: ${raid.pokemon.min_base_cp} - ${raid.pokemon.max_base_cp}\n` +
+				`Boosted: ${raid.pokemon.min_boosted_cp} - ${raid.pokemon.max_boosted_cp}` :
+				'',
 
-            raid_description = raid.is_exclusive ?
-            `EX Raid against ${pokemon}` :
-            `Level ${raid.pokemon.tier} Raid against ${pokemon}`,
+			raid_description = raid.is_exclusive ?
+				`EX Raid against ${pokemon}${pokemon_cp_string}` :
+				`Level ${raid.pokemon.tier} Raid against ${pokemon}${pokemon_cp_string}`,
 
             now = moment(),
 
