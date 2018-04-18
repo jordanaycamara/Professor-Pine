@@ -12,5 +12,10 @@
         "user": "root",
         "password": "Tripping123!",
         "schema": "pine"
+    },
+    "cache": {
+        "host": "localhost",
+        "auth": "",
+        "port": "6379"
     }
 }
