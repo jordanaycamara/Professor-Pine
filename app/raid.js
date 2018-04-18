@@ -17,9 +17,9 @@ const log = require('loglevel').getLogger('Raid'),
 
 class Raid {
     constructor() {
-        this.active_raid_storage = redis.createClient({ db: "0", host: private_settings.cache.host, port: private_settings.cache.port, password: private_settings.cache.auth });
+        this.active_raid_storage = redis.createClient({ db: "0" });
 
-        this.completed_raid_storage = redis.createClient({ db: "1", host: private_settings.cache.host, port: private_settings.cache.port, password: private_settings.cache.auth });
+        this.completed_raid_storage = redis.createClient({ db: "1" });
 
         // maps channel ids to raid info for that channel
         this.raids = Object.create(null);
