@@ -13,7 +13,7 @@ const log = require('loglevel').getLogger('Raid'),
     NaturalArgumentType = require('../types/natural'),
     TimeType = require('../types/time'),
     { promisify } = require('util'),
-    EXPIRE_TIME = 180;
+    EXPIRE_TIME = 10800;
 
 class Raid {
     constructor() {
