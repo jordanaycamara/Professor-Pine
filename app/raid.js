@@ -24,9 +24,13 @@ class Raid {
         // maps channel ids to raid info for that channel
         this.raids = Object.create(null);
 
+        var service = this;
+
         this.active_raid_storage.keys("*", function(err, raids) {
             raids.forEach((channel_id) => {
-                this.raids[channel_id] = this.active_raid_storage.get(channel_id);
+                service.active_raid_storage.get(channel_id, function(err, reply) {
+                    service.raids[channel_id] = JSON.parse(reply);
+                });
             });
         });
 
