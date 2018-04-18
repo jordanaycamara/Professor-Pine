@@ -16,6 +16,6 @@
     "cache": {
         "host": "ec2-34-226-156-118.compute-1.amazonaws.com",
         "auth": "p43c8b69e7e7eaa4b107ad1c639dde75b0462f4f3cd42b18d915697379c1a7748",
-        "port": "25769"
+        "port": "27649"
     }
 }
