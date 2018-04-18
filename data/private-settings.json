@@ -14,8 +14,8 @@
         "schema": "heroku_2799e9c84c66838"
     },
     "cache": {
-        "host": "ec2-34-226-156-118.compute-1.amazonaws.com",
+        "host": "ec2-35-172-48-31.compute-1.amazonaws.com",
         "auth": "p43c8b69e7e7eaa4b107ad1c639dde75b0462f4f3cd42b18d915697379c1a7748",
-        "port": "27649"
+        "port": "7889"
     }
 }
