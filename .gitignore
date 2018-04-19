@@ -5,7 +5,7 @@ node_modules/
 .idea/workspace.xml
 
 # ignore private settings
-#data/private-settings.json
+data/private-settings.json
 
 # ignore persisted raid data
 raids/**

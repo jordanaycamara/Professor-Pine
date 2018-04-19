@@ -87,7 +87,9 @@ class Raid {
                         // so schedule its deletion
                         raid.deletion_time = deletion_time;
 
-                        this.sendDeletionWarningMessage(raid);
+                        if (!settings.suppress_channel_deletion_warning) {
+                            this.sendDeletionWarningMessage(raid);
+                        }
 
                         this.persistRaid(raid);
                     }
@@ -187,7 +189,7 @@ class Raid {
                 // if this is a raid channel that's scheduled for deletion, trigger deletion warning message
                 const raid = this.getRaid(message.channel.id);
 
-                if (!!raid && !!raid.deletion_time) {
+                if (!!raid && !!raid.deletion_time && !settings.suppress_channel_deletion_warning) {
                     this.sendDeletionWarningMessage(raid);
                 }
             }
