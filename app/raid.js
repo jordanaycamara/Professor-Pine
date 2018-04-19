@@ -3,7 +3,6 @@
 const log = require('loglevel').getLogger('Raid'),
     removeDiacritics = require('diacritics').remove,
     moment = require('moment'),
-    private_settings = require('../data/private-settings'),
     settings = require('../data/settings'),
     redis = require('redis'),
     { RaidStatus, Team } = require('./constants'),
@@ -17,9 +16,9 @@ const log = require('loglevel').getLogger('Raid'),
 
 class Raid {
     constructor() {
-        this.active_raid_storage = redis.createClient({ db: "0", host: private_settings.cache.host, port: private_settings.cache.port, password: private_settings.cache.auth });
+        this.active_raid_storage = redis.createClient({ db: "0", host: process.env.REDIS_HOST, port: process.env.REDIS_PORT, password: process.env.REDIS_PASSWORD });
 
-        this.completed_raid_storage = redis.createClient({ db: "1", host: private_settings.cache.host, port: private_settings.cache.port, password: private_settings.cache.auth });
+        this.completed_raid_storage = redis.createClient({ db: "1", host: process.env.REDIS_HOST, port: process.env.REDIS_PORT, password: process.env.REDIS_PASSWORD });
 
         // maps channel ids to raid info for that channel
         this.raids = Object.create(null);
@@ -896,7 +895,7 @@ class Raid {
             raid.pokemon.name.charAt(0).toUpperCase() + raid.pokemon.name.slice(1) :
             '????',
             pokemon_url = !!raid.pokemon.name ?
-            `${private_settings.pokemon_url_base}${pokemon}-Pokemon-Go.png` :
+            `${process.env.POKEMON_URL_BASE}${pokemon}-Pokemon-Go.png` :
             '',
             pokemon_cp_string = raid.pokemon.boss_cp > 0 ?
             `${raid.pokemon.min_base_cp}-${raid.pokemon.max_base_cp} / ` +

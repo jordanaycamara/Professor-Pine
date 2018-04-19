@@ -12,17 +12,16 @@ require('loglevel-prefix-persist/server')(process.env.NODE_ENV, log, {
 
 log.setLevel('debug');
 
-const private_settings = require('./data/private-settings'),
-    Express = require('express')(),
+const Express = require('express')(),
     Commando = require('discord.js-commando'),
     Discord = require('discord.js'),
     Client = new Commando.Client({
-        owner: private_settings.owner,
+        owner: process.env.OWNER,
         restWsBridgeTimeout: 10000,
         restTimeOffset: 1000
     }),
     NotifyClient = new Discord.Client({
-        owner: private_settings.owner,
+        owner: process.env.OWNER,
         restWsBridgeTimeout: 10000,
         restTimeOffset: 1000
     }),
@@ -121,7 +120,7 @@ Client.registry.registerCommands([
     require('./commands/util/help')
 ]);
 
-if (private_settings.google_api_key !== '') {
+if (process.env.GOOGLE_API_KEY !== '') {
     Client.registry.registerCommand(
         require('./commands/util/find-region'));
 }
@@ -181,7 +180,7 @@ Client.on('disconnect', event => {
     log.error(`Client disconnected, code ${event.code}, reason '${event.reason}'...`);
 
     Client.destroy()
-        .then(() => Client.login(private_settings.discord_bot_token));
+        .then(() => Client.login(process.env.DISCORD_BOT_TOKEN));
 });
 
 Client.on('reconnecting', () => log.info('Client reconnecting...'));
@@ -190,7 +189,7 @@ Client.on('guildUnavailable', guild => {
     log.warn(`Guild ${guild.id} unavailable!`);
 });
 
-Client.login(private_settings.discord_bot_token);
+Client.login(process.env.DISCORD_BOT_TOKEN);
 
 NotifyClient.on('ready', () => {
     log.info('Notify client logged in');
@@ -205,7 +204,7 @@ NotifyClient.on('debug', err => log.debug(err));
 NotifyClient.on('rateLimit', event =>
     log.warn(`Rate limited for ${event.timeout} ms, triggered by method '${event.method}', path '${event.path}', route '${event.route}'`));
 
-NotifyClient.login(private_settings.discord_notify_token);
+NotifyClient.login(process.env.DISCORD_NOTIFY_TOKEN);
 
 Express.set('port', (process.env.PORT || 5000));
 

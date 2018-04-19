@@ -4,9 +4,6 @@ node_modules/
 # ignore IDEA workspace file
 .idea/workspace.xml
 
-# ignore private settings
-#data/private-settings.json
-
 # ignore persisted raid data
 raids/**
 
