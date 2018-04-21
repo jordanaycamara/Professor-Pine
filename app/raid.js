@@ -13,6 +13,7 @@ const log = require('loglevel').getLogger('Raid'),
     NaturalArgumentType = require('../types/natural'),
     TimeType = require('../types/time'),
     { promisify } = require('util'),
+    OpenWeatherMap = require('openweather-apis'),
     EXPIRE_TIME = 10800;
 
 class Raid {
@@ -20,6 +21,9 @@ class Raid {
         this.active_raid_storage = redis.createClient({ db: "0" });
 
         this.completed_raid_storage = redis.createClient({ db: "1" });
+
+        OpenWeatherMap.setLang('en');
+        OpenWeatherMap.setAPPID(private_settings.openweathermap_api_key);
 
         // maps channel ids to raid info for that channel
         this.raids = Object.create(null);
@@ -894,6 +898,7 @@ class Raid {
     }
 
     async getFormattedMessage(raid) {
+
         const pokemon = !!raid.pokemon.name ?
             raid.pokemon.name.charAt(0).toUpperCase() + raid.pokemon.name.slice(1) :
             '????',
@@ -906,7 +911,6 @@ class Raid {
 					.map(condition => Helper.getEmoji(condition))
 					.join('')}` :
             '',
-
             raid_description = raid.is_exclusive ?
             `EX Raid against ${pokemon}` :
             `Level ${raid.pokemon.tier} Raid against ${pokemon}`,
@@ -967,6 +971,48 @@ class Raid {
             .filter(attendee_entry => attendee_entry[1].status === RaidStatus.COMPLETE),
             embed = new Discord.MessageEmbed();
 
+
+        var weather = await this.getWeather(gym);
+
+        const condition = weather.weather[0].description;
+        const windSpeed = weather.wind.speed;
+        const sunset = weather.sys.sunset;
+        const sunrise = weather.sys.sunrise;
+
+        var weather_icon = "";
+        var weather_description = "";
+
+        if (condition == "shower rain" || condition == "rain") {
+            weather_icon = "rain";
+            weather_description = "Rainy"
+        } else if (condition == "snow") {
+            weather_icon = "snow"
+            weather_description = "Snowy"
+        }
+        if (condition == "few clouds") {
+            weather_icon = "partlycloudy";
+            weather_icon = "Partly Cloudy";
+        } else if (condition == "broken clouds" || condition == "scattered clouds") {
+            weather_icon = "cloudy";
+            weather_description = "Cloudy";
+        } else if (condition == "mist") {
+            weather_icon = "fog"
+            weather_description = "Fog"
+        } else if (windSpeed > 25.0) {
+            weather_icon = "windy";
+            weather_description = "Windy";
+        } else if (condition == "clear sky") {
+            const now_moment = moment().utc().valueOf().toString().substring(0, 10),
+                now = parseInt(now_moment);
+            if (now > sunrise && now < sunset) {
+                weather_icon = "sunny";
+                weather_description = "Sunny";
+            } else {
+                weather_icon = "clear";
+                weather_description = "Clear";
+            }
+        }
+
         embed.setColor('GREEN');
         embed.setTitle(`Map Link: ${gym_name}`);
         embed.setURL(gym_url);
@@ -984,6 +1030,8 @@ class Raid {
                         ''))
                 .join(''));
         }
+
+        embed.addField('**Current Weather**', `${Helper.getEmoji(weather_icon)} - ${weather_description}`);
 
         if (pokemon_cp_string) {
             embed.addField('**Catch CP Ranges**', pokemon_cp_string);
@@ -1067,6 +1115,19 @@ class Raid {
         return { embed };
     }
 
+    async getWeather(gym) {
+        OpenWeatherMap.setCoordinate(gym.gymInfo.latitude, gym.gymInfo.longitude);
+
+        return new Promise(function(resolve, reject) {
+
+            // get the Description of the weather condition
+            OpenWeatherMap.getAllWeather(function(err, weather) {
+                resolve(weather);
+            });
+        });
+
+
+    }
     async refreshStatusMessages(raid) {
         [...raid.messages, raid.last_status_message]
         .filter(message_cache_id => message_cache_id !== undefined)
