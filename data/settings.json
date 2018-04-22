@@ -19,7 +19,8 @@
   "features": {
     "ex_gym_channel": false,
     "notifications": true,
-    "roles": true
+    "roles": true,
+    "weather": true
   },
   "channels": {
     "bot_lab": "bot-commands",

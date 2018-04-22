@@ -972,44 +972,46 @@ class Raid {
             embed = new Discord.MessageEmbed();
 
 
-        var weather = await this.getWeather(gym);
+        if (settings.features.weather) {
+            var weather = await this.getWeather(gym);
 
-        const condition = weather.weather[0].description;
-        const windSpeed = weather.wind.speed;
-        const sunset = weather.sys.sunset;
-        const sunrise = weather.sys.sunrise;
+            const condition = weather.weather[0].description;
+            const windSpeed = weather.wind.speed;
+            const sunset = weather.sys.sunset;
+            const sunrise = weather.sys.sunrise;
 
-        var weather_icon = "";
-        var weather_description = "";
+            var weather_icon = "";
+            var weather_description = "";
 
-        if (condition == "shower rain" || condition == "rain") {
-            weather_icon = "rain";
-            weather_description = "Rainy"
-        } else if (condition == "snow") {
-            weather_icon = "snow"
-            weather_description = "Snowy"
-        }
-        if (condition == "few clouds") {
-            weather_icon = "partlycloudy";
-            weather_icon = "Partly Cloudy";
-        } else if (condition == "broken clouds" || condition == "scattered clouds") {
-            weather_icon = "cloudy";
-            weather_description = "Cloudy";
-        } else if (condition == "mist") {
-            weather_icon = "fog"
-            weather_description = "Fog"
-        } else if (windSpeed > 25.0) {
-            weather_icon = "windy";
-            weather_description = "Windy";
-        } else if (condition == "clear sky") {
-            const now_moment = moment().utc().valueOf().toString().substring(0, 10),
-                now = parseInt(now_moment);
-            if (now > sunrise && now < sunset) {
-                weather_icon = "sunny";
-                weather_description = "Sunny";
-            } else {
-                weather_icon = "clear";
-                weather_description = "Clear";
+            if (condition == "shower rain" || condition == "rain") {
+                weather_icon = "rain";
+                weather_description = "Rainy"
+            } else if (condition == "snow") {
+                weather_icon = "snow"
+                weather_description = "Snowy"
+            }
+            if (condition == "few clouds" || condition == "scattered clouds") {
+                weather_icon = "partlycloudy";
+                weather_icon = "Partly Cloudy";
+            } else if (condition == "broken clouds") {
+                weather_icon = "cloudy";
+                weather_description = "Cloudy";
+            } else if (condition == "mist") {
+                weather_icon = "fog"
+                weather_description = "Fog"
+            } else if (windSpeed > 25.0) {
+                weather_icon = "windy";
+                weather_description = "Windy";
+            } else if (condition == "clear sky") {
+                const now_moment = moment().utc().valueOf().toString().substring(0, 10),
+                    now = parseInt(now_moment);
+                if (now > sunrise && now < sunset) {
+                    weather_icon = "sunny";
+                    weather_description = "Sunny";
+                } else {
+                    weather_icon = "clear";
+                    weather_description = "Clear";
+                }
             }
         }
 
@@ -1031,7 +1033,9 @@ class Raid {
                 .join(''));
         }
 
-        embed.addField('**Current Weather**', `${Helper.getEmoji(weather_icon)} - ${weather_description}`);
+        if (settings.features.weather) {
+            embed.addField('**Current Weather**', `${Helper.getEmoji(weather_icon)} - ${weather_description}`);
+        }
 
         if (pokemon_cp_string) {
             embed.addField('**Catch CP Ranges**', pokemon_cp_string);
